@@ -1,0 +1,231 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
+#include <stdio.h>
+int main()
+{
+		int n,i,j,br,ba,p1,p2,life,p,q;
+		char ch;
+        printf("enter array size");
+		scanf("%d",&n);
+		int a[n][n];
+		for(i=0;i<n;i++)
+		{
+			for(j=0;j<n;j++)
+			{
+				a[i][j]=0;
+			}
+		}
+        printf("enter no.of bricks");		
+		scanf("%d",&br);
+        printf("enter positions");		
+		for(i=0;i<br;i++)
+		{
+			scanf("%d",&p1);
+			scanf("%d",&p2);
+			a[p1][p2]=1;
+		}
+		for(i=0;i<n;i++)
+		{
+		    for(j=0;j<n;j++)
+		    {
+		        if(i==0||j==0||j==n-1)
+		            printf("%c ",'W');
+		        else if(i==n-1&&j!=0&&j!=n-1&&j!=n/2)
+		            printf("%c ",'G');
+		        else if(i==n-1&&j==n/2)
+		            printf("%c ",'O');
+		        else
+    		        printf("%d ",a[i][j]);
+		    }
+		    printf("\n");
+		}
+        printf("enter lifes");		
+		scanf("%d",&life);
+		i=n-1;
+		j=n/2;
+		while(life!=0)
+		{
+			if(br==0)
+			{
+				printf("You Won");
+				exit(0);
+			}
+			printf("enter choice");
+			scanf(" %c",&ch);
+			if(ch=='s'||ch=='S')
+			{
+				p1=i;
+				while(i>0&&a[i][j]!=1)
+				{
+					i--;
+				}
+				if(i==0)
+				{
+					life--;
+				}
+				else
+				{
+					a[i][j]=0;
+					br--;
+				}
+				for(p=0;p<n;p++)
+				{
+					for(q=0;q<n;q++)
+					{
+					    if(p==0||q==0||q==n-1)
+		                    printf("%c ",'W');
+		                    else if(p==n-1&&q!=0&&q!=n-1&&q!=j)
+		            printf("%c ",'G');
+					   else if(p==n-1&&q==j)
+					        printf("%c ",'O');
+				       else
+	    					printf("%d ",a[p][q]);
+					}
+					printf("\n");
+				}
+				i=p1;
+			}
+			else if(ch=='l'||ch=='L')
+			{
+				while(j>0)
+				{
+					i--;
+					j--;
+					if(a[i][j]==1)
+					{
+					    a[i][j]=0;
+					    br--;
+					    i++;
+					    while(i<n-1)
+					    {
+					        if(a[i][j]==1)
+					        {
+					            a[i][j]=0;
+					            br--;
+					        }
+					        i++;
+					    }
+					}
+				}
+				if(j==0)
+				{
+			    	life--;
+			    	while(j<n-1&&a[i][j]!=1)
+			    	{
+			    		j++;
+			    	}
+			    	if(j<n-1)
+			    	{
+			    		a[i][j]=0;
+			    		br--;
+			    		while(i<n-1)
+			    		{
+			    			if(a[i][j]==1)
+			    			{
+			    				a[i][j]=0;
+			    				br--;
+			    			}
+			    			i++;
+			    		}
+			    	}
+			    	else
+			    	{
+			    		if(br!=0)
+			    		{
+				    		printf("choose another choice\n");	
+				    	}
+				    }
+		   		}
+		   		for(p=0;p<n;p++)
+			    {
+			    	for(q=0;q<n;q++)
+			    	{
+			    	    if(p==0||q==0||q==n-1)
+		                    printf("%c ",'W');
+		                  else if(p==n-1&&q!=0&&q!=n-1&&q!=j)
+		                    printf("%c ",'G');
+			    	    else if(p==n-1&&q==j)
+			    	        printf("%c ",'O');
+                        else
+        					printf("%d ",a[p][q]);
+	    			}
+	    			printf("\n");
+	    		}
+			}
+			else if(ch=='r'||ch=='R')
+			{
+				while(j<n-1)
+				{
+					i--;
+					j++;
+					if(a[i][j]==1)
+					{
+					    a[i][j]=0;
+					    br--;
+					    i++;
+					    while(i<n-1)
+					    {
+					        if(a[i][j]==1)
+					        {
+					            a[i][j]=0;
+					            br--;
+					        }
+					        i++;
+					    }
+					}
+				}
+				if(j==n-1)
+				{
+			    	life--;
+			    	while(j>0&&a[i][j]!=1)
+			    	{
+			    		j--;
+				    }
+				    if(j>0)
+				    {
+				    	a[i][j]=0;
+				    	br--;
+				    	while(i<n-1)
+				    	{
+				    		if(a[i][j]==1)
+				    		{
+				    			a[i][j]=0;
+				    			br--;
+				    		}
+				    		i++;
+				    	}
+				    }
+				    else
+				    {
+				    	if(br!=0)
+				    	{
+				    		printf("choose another choice\n");	
+				    	}
+				    }
+				}
+				for(p=0;p<n;p++)
+				{
+					for(q=0;q<n;q++)
+					{
+					    if(p==0||q==0||q==n-1)
+		                  printf("%c ",'W');
+		                  else if(p==n-1&&q!=0&&q!=n-1&&q!=j)
+		            printf("%c ",'G');
+					    else if(p==n-1&&q==j)
+					        printf("%c ",'O');
+					   else
+    						printf("%d ",a[p][q]);
+					}
+					printf("\n");
+			}
+		}
+	}
+	printf("You Lose");
+}
+
